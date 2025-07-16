@@ -1,0 +1,37 @@
+pipeline {
+  agent any
+
+  stages {
+
+    stage('Clone') {
+      steps {
+        echo '🔁 Cloning repo...'
+        git 'https://github.com/Preeti1693/mygit.git'
+      }
+    }
+
+    stage('Build') {
+      steps {
+        echo '🔧 Simulating build...'
+        sh 'ls -l'
+      }
+    }
+
+    stage('Deploy') {
+      steps {
+        echo '🚀 Deploying file to target server...'
+        sh 'scp file1.txt ubuntu@13.221.164.133:/tmp/'
+      }
+    }
+  }
+
+  post {
+    success {
+      echo '✅ Pipeline completed successfully.'
+    }
+    failure {
+      echo '❌ Pipeline failed. Check logs.'
+    }
+  }
+}
+
